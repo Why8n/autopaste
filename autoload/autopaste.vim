@@ -1,5 +1,4 @@
 fun! s:paste(cmd)
-    echom 'normal! '.a:cmd
     silent! execute 'normal! '.a:cmd
 endf
 
