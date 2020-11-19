@@ -1,4 +1,5 @@
 fun! s:paste(cmd)
+    echom 'normal! '.a:cmd
     silent! execute 'normal! '.a:cmd
 endf
 
@@ -8,7 +9,7 @@ endf
 
 fun! s:pasteInInsertMode(reg)
     let curPos = getcurpos()
-    if curPos[4] ==? col('$')
+    if curPos[4] ==? virtcol('$')
         " if curwant is line end, then append paste content
         call s:paste(printf('"%sp',a:reg))
     else
@@ -17,7 +18,7 @@ fun! s:pasteInInsertMode(reg)
 endf
 
 fun! s:pasteInVisualMode(reg)
-    silent! normal! gvd 
+    silent! normal! gvd
     call s:paste(printf('"%sP',a:reg))
 endf
 
@@ -34,4 +35,3 @@ fun! autopaste#paste(mode,reg)
     endif
     let &paste = flag
 endf
-
