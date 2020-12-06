@@ -1,4 +1,5 @@
 fun! s:paste(cmd)
+    echom 'normal! '.a:cmd
     silent! execute 'normal! '.a:cmd
 endf
 
@@ -13,6 +14,8 @@ fun! s:pasteInInsertMode(reg)
         call s:paste(printf('"%sp',a:reg))
     else
         call s:paste(printf('"%sP',a:reg))
+        " fix bug: move right to correct cursor position
+        silent! normal! l
     endif
 endf
 
